@@ -32,10 +32,13 @@ class TaskTile extends StatelessWidget {
           : Text("${task.date.toLocal()}".split(' ')[0]),
       onLongPress: listTileDelete,
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailsScreen(task: task)),
-        );
+        task.isDone
+            ? Null
+            : Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailsScreen(task: task)),
+              );
       },
     );
   }

@@ -24,7 +24,9 @@ class _CompletedTasksListState extends State<CompletedTasksList> {
             return TaskTile(
               task: taskData.completedTasks[index],
               checkboxChange: (newValue) {},
-              listTileDelete: () {},
+              listTileDelete: () {
+                
+              },
             );
           },
         );
