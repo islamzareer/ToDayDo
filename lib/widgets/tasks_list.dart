@@ -6,27 +6,29 @@ import 'package:todaydo/models/tasks_data.dart';
 import 'package:todaydo/widgets/task_tile.dart';
 
 class TasksList extends StatelessWidget {
-  
+  const TasksList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
       builder: (context, taskData, child) {
-        List<Task> TaskList =
-            taskData.tasks.where((element) => element.type == taskData.selectedType).toList();
+        List<Task> taskList = taskData.tasks
+            .where((element) => element.type == taskData.selectedType)
+            .toList();
+        
         return ListView.builder(
           padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-          itemCount: TaskList.length,
+          itemCount: taskList.length,
           itemBuilder: (context, index) {
             return TaskTile(
-              isChecked: TaskList[index].isDone,
-              taskTitle: TaskList[index].name,
-              taskDate: TaskList[index].date,
+              isChecked: taskList[index].isDone,
+              taskTitle: taskList[index].name,
+              taskDate: taskList[index].date,
               checkboxChange: (newValue) {
-                taskData.updateTask(TaskList[index]);
+                taskData.updateTask(taskList[index]);
               },
               listTileDelete: () {
-                taskData.deleteTask(TaskList[index]);
+                taskData.deleteTask(taskList[index]);
               },
             );
           },

@@ -4,9 +4,9 @@ import 'package:todaydo/models/task.dart';
 class TaskData extends ChangeNotifier {
   List<Task> tasks = [];
   List<Task> completedTasks = [];
-  String selectedType = "Inbox";
+  late String selectedType = "Inbox";
   void addTask(newTaskName, date, type) {
-    tasks.add(Task(name: newTaskName, date: date));
+    tasks.add(Task(name: newTaskName, date: date, type: type));
     notifyListeners();
   }
 
