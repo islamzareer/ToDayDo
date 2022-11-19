@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todaydo/models/tasks_data.dart';
 import 'package:todaydo/screens/add_task.dart';
+import 'package:todaydo/screens/menu_screen.dart';
+import 'package:todaydo/widgets/completed_tasks.dart';
 import 'package:todaydo/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    final String selectedType =
+        Provider.of<TaskData>(context, listen: false).getselectedType();
     return SafeArea(
         child: Scaffold(
+            key: _key,
+            drawer: MenuScreen(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton(
@@ -22,7 +28,7 @@ class TasksScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: const AddTaskScren(),
+                      child: AddTaskScren(),
                     ),
                   ),
                 );
@@ -39,14 +45,16 @@ class TasksScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: const [
-                    Icon(
-                      Icons.playlist_add_check,
-                      color: Colors.white,
-                      size: 45,
+                  Row(children: [
+                    IconButton(
+                      icon: const Icon(Icons.playlist_add_check,
+                          color: Colors.white, size: 45),
+                      onPressed: () {
+                        _key.currentState!.openDrawer();
+                      },
                     ),
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       "ToDayDo",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -57,8 +65,22 @@ class TasksScreen extends StatelessWidget {
                   const Divider(
                     color: Colors.white,
                   ),
-                  Text('${Provider.of<TaskData>(context).tasks.length} Task/s',
-                      style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  Text(
+                      '${Provider.of<TaskData>(context).tasks.where((element) => element.type == selectedType).toList().length} Task/s',
+                      style:
+                          const TextStyle(fontSize: 20, color: Colors.white)),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        child: TasksList()),
+                  ),
                   Expanded(
                     child: Container(
                         margin: const EdgeInsets.only(top: 20),
@@ -68,11 +90,10 @@ class TasksScreen extends StatelessWidget {
                             Radius.circular(20),
                           ),
                         ),
-                        child: const TasksList()),
-                  )
+                        child: const CompletedTasksList()),
+                  ),
                 ],
               ),
             )));
   }
 }
-
