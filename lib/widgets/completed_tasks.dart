@@ -22,9 +22,7 @@ class _CompletedTasksListState extends State<CompletedTasksList> {
           itemCount: taskData.completedTasks.length,
           itemBuilder: (context, index) {
             return TaskTile(
-              isChecked: taskData.completedTasks[index].isDone,
-              taskTitle: taskData.completedTasks[index].name,
-              taskDate: taskData.completedTasks[index].date,
+              task: taskData.completedTasks[index],
               checkboxChange: (newValue) {},
               listTileDelete: () {},
             );

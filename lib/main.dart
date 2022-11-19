@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-   return ChangeNotifierProvider(
+    return ChangeNotifierProvider(
       create: (context) => TaskData(),
-      child:  MaterialApp(
+      child: MaterialApp(
         title: 'ToDayDo',
         home: TasksScreen(),
       ),

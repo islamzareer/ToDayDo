@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:todaydo/models/subtask.dart';
 import 'package:todaydo/models/task.dart';
 
 class TaskData extends ChangeNotifier {
   List<Task> tasks = [];
   List<Task> completedTasks = [];
+  List<SubTask> subtasks = [];
   late String selectedType = "Inbox";
   void addTask(newTaskName, date, type) {
     tasks.add(Task(name: newTaskName, date: date, type: type));
+    notifyListeners();
+  }
+
+  void addSubTask(Task task, name) {
+    subtasks.add(SubTask(name: name));
+    notifyListeners();
+  }
+
+  void updateSubTask(SubTask subtask) {
+    subtask.changeStatus(subtask);
     notifyListeners();
   }
 
@@ -14,9 +26,9 @@ class TaskData extends ChangeNotifier {
     selectedType = type;
     notifyListeners();
   }
-  String getselectedType(){
-    return selectedType;
 
+  String getselectedType() {
+    return selectedType;
   }
 
   void updateTask(Task task) {

@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:todaydo/models/tasks_data.dart';
 
 class AddTaskScren extends StatefulWidget {
+  const AddTaskScren({super.key});
+
   @override
   State<AddTaskScren> createState() => _AddTaskScrenState();
 }

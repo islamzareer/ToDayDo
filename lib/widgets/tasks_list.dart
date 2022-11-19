@@ -15,15 +15,13 @@ class TasksList extends StatelessWidget {
         List<Task> taskList = taskData.tasks
             .where((element) => element.type == taskData.selectedType)
             .toList();
-        
+
         return ListView.builder(
           padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
           itemCount: taskList.length,
           itemBuilder: (context, index) {
             return TaskTile(
-              isChecked: taskList[index].isDone,
-              taskTitle: taskList[index].name,
-              taskDate: taskList[index].date,
+              task: taskList[index],
               checkboxChange: (newValue) {
                 taskData.updateTask(taskList[index]);
               },

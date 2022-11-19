@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todaydo/models/tasks_data.dart';
-import 'package:todaydo/screens/add_task.dart';
+import 'package:todaydo/screens/add_task_screen.dart';
 import 'package:todaydo/screens/menu_screen.dart';
 import 'package:todaydo/widgets/completed_tasks.dart';
 import 'package:todaydo/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  TasksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class TasksScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             key: _key,
-            drawer: MenuScreen(),
+            drawer: const MenuScreen(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton(
@@ -28,7 +30,7 @@ class TasksScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: AddTaskScren(),
+                      child: const AddTaskScren(),
                     ),
                   ),
                 );
@@ -79,7 +81,7 @@ class TasksScreen extends StatelessWidget {
                             Radius.circular(20),
                           ),
                         ),
-                        child: TasksList()),
+                        child: const TasksList()),
                   ),
                   Expanded(
                     child: Container(
